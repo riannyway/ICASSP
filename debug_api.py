@@ -156,7 +156,7 @@ class GLMClient:
 
     def comprehensive_local_processing(self, text: str) -> Dict:
         """
-        增强的本地处理方法（你现有代码的改进版）
+        增强的本地处理方法（现有代码的改进版）
         """
         original_text = text.strip()
         
@@ -289,7 +289,7 @@ class GLMClient:
             'method': method
         }
 
-    # 保持你现有的其他方法...
+    # 保持现有的其他方法...
     def batch_detect_and_correct_texts(self, texts: List[str], batch_size: int = None) -> List[Dict]:
         segments = []
         for i, text in enumerate(texts):
@@ -314,4 +314,5 @@ class GLMClient:
                 'method': result.get('method', 'local_only')
             })
         
+
         return simple_results
