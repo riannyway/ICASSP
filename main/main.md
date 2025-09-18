@@ -9,7 +9,7 @@ R1-Omni-0.5B需要额外部署三个模型，一个是Whisper-Large-V3，一个�
 ```
 另外，在Video代码中替换掉bert-uncased的实际路径
 要准备R1-Omni-0.5B，下载路径：
-```json
+```shell
 https://www.modelscope.cn/models/iic/R1-Omni-0.5B
 ```
 
@@ -21,11 +21,11 @@ Audio代码用于生成音频参数的分析，需要准备mp3音频文件:
 ```
 
 Video代码用于生成视频分析，需要将MP4格式的文件和txt文件一并传入（用于提取说话人和timestamp），需要将human的文件夹与代码放在同一个根目录下：
-```json
+```shell
 python video.py --root_dir {folder} --output_dir {} --modal {video or video_audio or audio}
 ```
 combined用于将两者的输出结合起来，用于提供给后续生成因果链的prompt之一
-```json
+```shell
 python combined.py --audio_dir --emotion_dir --output_dir
 ```
 在get_emo_sw中，需要提供txt文本，还有上述拼接完成的json字符串,生成好的json字符串放入到input_dir中，其他的输入不变
