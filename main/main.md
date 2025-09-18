@@ -31,7 +31,11 @@ https://huggingface.co/openai/whisper-large-v3
  "mm_audio_tower": "/path/to/local/models/whisper-large-v3",
  "mm_vision_tower": "/path/to/local/models/siglip-base-patch16-224"
 ```
-如果出现报错可能是没有替换bert-uncased
+如果出现报错可能是没有替换bert-uncased，如果你已经部署bert，你需要在humanOmni/humanOmni_arch.py的第83行替换掉bert路径：
+```python
+bert_model = "/gpfs/work/aac/yulongli19/.cache/modelscope/hub/models/AI-ModelScope/bert-base-uncased" #替换为你的bert模型路径
+```
+
 在Video（在运行文件）代码中替换成你的bert-uncased实际路径
 要准备R1-Omni-0.5B，下载路径：
 ```shell
