@@ -19,19 +19,20 @@ python main.py --api_key --recursive --correct --test-connection --parallel --co
 ```
 转文本的环境在主目录的requirements.txt中
 
-R1-Omni-0.5B需要额外部署三个模型，一个是Whisper-Large-V3，一个是 siglip-base-patch16-224，还有bert-uncased，并且在R1-Omni-0.5Bd的config.json中的第23和31行替换掉：
+R1-Omni需要额外部署四个模型，一个是Whisper-Large-V3，一个是 siglip-base-patch16-224，一个是R1-Omni-0.5B，还有bert-uncased。部署完后需要在R1-Omni-0.5B的config.json中的第23和31行进行替换：
 下载路径分别为：
-```json
+```shell
 https://www.modelscope.cn/models/AI-ModelScope/bert-base-uncased
 https://hugging-face.cn/docs/transformers/model_doc/siglip
 https://huggingface.co/openai/whisper-large-v3
 ```
-下载完后更改对应的模型路径
+下载完后更改对应的模型路径（第23、31行）
 ```json
  "mm_audio_tower": "/path/to/local/models/whisper-large-v3",
  "mm_vision_tower": "/path/to/local/models/siglip-base-patch16-224"
 ```
-另外，在Video代码中替换掉bert-uncased的实际路径
+如果出现报错可能是没有替换bert-uncased
+在Video（在运行文件）代码中替换成你的bert-uncased实际路径
 要准备R1-Omni-0.5B，下载路径：
 ```shell
 https://www.modelscope.cn/models/iic/R1-Omni-0.5B
@@ -52,4 +53,10 @@ combined用于将两者的输出结合起来，用于提供给后续生成因果
 ```shell
 python combined.py --audio_dir --emotion_dir --output_dir
 ```
+所有流程运行完之后才能进行因果链生成和评估
 在get_emo_sw中，需要提供txt文本，还有上述拼接完成的json字符串,生成好的json字符串放入到input_dir中，其他的输入不变
+
+评估代码（get_emo_score)不变，与原本的相同
+```shell
+python get_emo_score.py --gt_dir --input_dir --output_dir --batch --event_shreshold
+```
