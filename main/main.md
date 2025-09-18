@@ -1,7 +1,11 @@
 ## 文档
 
-部署了两个大模型，分别是 Qwen-Audio-7B-Instruct 和R1-Omni-0.5B, Qwen的模型文件没有做任何修改，直接modelscope官方的即可
+部署了两个大模型，分别是 Qwen-Audio-7B-Instruct 和R1-Omni-0.5B, Qwen的模型文件没有做任何修改,然后直接用modelscope官方的即可
 主目录下的代码为文本转录以及订正，调用了Fun-ASR和ChatGLM的API:
+```shell
+python main.py --api_key --recursive --correct --test-connection --parallel --continue-on-error --dry-run
+```
+完整参数如下：
 ```python
     parser.add_argument('input', help='输入文件/目录路径或通配符模式 (如 "*.txt" 或 "transcripts/")')
     parser.add_argument('--api-key', help='GLM API密钥（可选，优先使用环境变量）')
@@ -13,9 +17,16 @@
     parser.add_argument('--continue-on-error', action='store_true', help='遇到错误时继续处理其他文件')
     parser.add_argument('--dry-run', action='store_true', help='预览模式：只显示要处理的文件，不实际处理')
 ```
-转文本的环境目录在主目录的requirements中
+转文本的环境在主目录的requirements.txt中
 
-R1-Omni-0.5B需要额外部署三个模型，一个是Whisper-Large-V3，一个是 siglip-base-patch16-224，还有bert-uncased，并且在config.json中的第23和31行替换掉：
+R1-Omni-0.5B需要额外部署三个模型，一个是Whisper-Large-V3，一个是 siglip-base-patch16-224，还有bert-uncased，并且在R1-Omni-0.5Bd的config.json中的第23和31行替换掉：
+下载路径分别为：
+```json
+https://www.modelscope.cn/models/AI-ModelScope/bert-base-uncased
+https://hugging-face.cn/docs/transformers/model_doc/siglip
+https://huggingface.co/openai/whisper-large-v3
+```
+下载完后更改对应的模型路径
 ```json
  "mm_audio_tower": "/path/to/local/models/whisper-large-v3",
  "mm_vision_tower": "/path/to/local/models/siglip-base-patch16-224"
