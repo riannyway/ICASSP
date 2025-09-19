@@ -39,9 +39,13 @@ section. Causemotion uses only the text modal. LLM refers to using only the LLM 
 
 确保这些模型均已经安装：
 `google-bert/bert-base-uncased`
+
 `google/siglip-base-patch16-224`
+
 `openai/whisper-large-v3`
+
 `StarJiaxing/R1-Omni-0.5B`
+
 `https://modelscope.cn/models/qwen/Qwen2-Audio-7B-Instruct`
 
 模型文件路径替换：
@@ -60,7 +64,7 @@ bert_model = "/gpfs/work/aac/yulongli19/.cache/modelscope/hub/models/AI-ModelSco
 
 数据集：
 你需要准备MP4视频文件、txt转录文本文件，以及音频文件，推荐使用mp3格式：
-
+```text
 |-video
     |-chat_1.mp4
 
@@ -69,7 +73,7 @@ bert_model = "/gpfs/work/aac/yulongli19/.cache/modelscope/hub/models/AI-ModelSco
 
 |-audio
     |-chat_1.mp3
-
+```
 
 ## 运行
 1.准备环节：
@@ -100,7 +104,7 @@ python combined.py --audio_dir {audio} --input_dir {video_info} --output_dir {ou
 ```shell
 python get_emo_sw.py --input_dir --other_text {combined_text} --output_dir --config_path --llm_model --batch --window_sizes --step_sizes
 ```
-评分代码不变（get_emo_score）：
+评分代码：
 ```shell
 python get_emo_score.py --gt_dir --input_dir --output_dir --batch --event_shreshold
 ```
